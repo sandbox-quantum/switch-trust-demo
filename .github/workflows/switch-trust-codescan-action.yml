@@ -1,0 +1,19 @@
+name: Switch Trust Codescan
+run-name: Switch Trust Inventory scan on ${{ github.repository }} by ${{ github.actor }}
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 10 * * 1-5"
+permissions:
+  contents: read
+jobs:
+  Switch-Trust-Inventory-Scan-Action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Switch Trust Inventory Scan
+        uses: sandbox-quantum/switch-trust-codescan-action@7e261a61f4d052c722f0a384c946f571f142dfd1 # main
+        with:
+          switch_trust_instance: https://app.switchagents.ai
+          switch_trust_token: ${{ secrets.SWITCH_TRUST_TOKEN }}
+          llm_model: google:gemini-3.5-flash
+          llm_api_key: ${{ secrets.LLM_API_KEY }}
